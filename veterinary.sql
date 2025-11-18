@@ -146,3 +146,9 @@ FROM appointments a
 JOIN animals an ON a.animalid = an.animalid
 JOIN owners o ON an.ownerid = o.ownerid
 WHERE o.ofirstname = 'Maria';
+SELECT an.name, COUNT(*) AS total_appointments
+FROM appointments a
+JOIN animals an ON a.animalid = an.animalid
+GROUP BY an.name
+ORDER BY total_appointments DESC
+LIMIT 1;
