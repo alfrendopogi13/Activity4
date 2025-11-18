@@ -132,3 +132,5 @@ ALTER TABLE owners
 ADD registereddate DATE;
 ALTER TABLE payments
 RENAME COLUMN paymentdate TO paymenttime;
+DELETE FROM appointments
+WHERE animalid = 5;
