@@ -1,3 +1,3 @@
 # Activity4
 ## Collaborators
-- Garcia, Alejandro
+- Garcia, Alejandro A.
