@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 CREATE DATABASE veterinary;
 
 CREATE TABLE owners(
@@ -18,7 +17,7 @@ CREATE TABLE animals (
     gender VARCHAR(10),
     color VARCHAR(50),
     ownerid INT,
-    PRIMARY KEY (ownerid) REFERENCES owners(ownerid)
+    FOREIGN KEY (ownerid) REFERENCES owners(ownerid)
 );
 CREATE TABLE appointments (
     appointid INT PRIMARY KEY,
@@ -45,7 +44,7 @@ CREATE TABLE invoices (
 CREATE TABLE medicalrecords (
     recordid INT PRIMARY KEY,
     animalid INT,
-    recorddate DATETIME,
+    recorddate TIMESTAMP,
     doctorid INT,
     diagnosis VARCHAR(255),
     prescription VARCHAR(255),
@@ -90,8 +89,8 @@ VALUES
 (7, 7, '2023-04-12', 'Vaccination'),
 (8, 8, '2023-04-18', 'Spaying Surgery'),
 (9, 9, '2023-05-02', 'Allergic Reaction Check'),
-(10, 10, '2023-05-20', 'Eye Infection (Conjunctivitis)');
-INSERT INTO doctors(doctorid, dfirstname, dlastname, speciality, phone, email)
+(10, 1, '2023-05-20', 'Eye Infection (Conjunctivitis)');
+INSERT INTO doctors(doctorid, firstname, lastname, specialty, phone, email)
 VALUES
 (1, 'Maria', 'Santos', 'General Veterinarian', '987-654-3210', 'maria@example.com'),
 (2, 'Antonio', 'Gonzales', 'Feline Specialist', '555-123-4567', 'antonio@example.com'),
@@ -103,7 +102,7 @@ VALUES
 (8, 'Isabella', 'Cruz', 'Internal Medicine Specialist', '888-444-5555', 'isabella@example.com'),
 (9, 'Rafael', 'Lopez', 'Dental Specialist', '222-333-4444', 'rafael@example.com'),
 (10, 'Elena', 'Mendoza', 'Emergency Care Specialist', '444-555-6666', 'elena@example.com');
-INSERT INTO invoices(invoiceid, appointid, totalamount, paymenttime)
+INSERT INTO invoices(invoiceid, appointid, totalamount, paymentdate)
 VALUES
 (1, 1, 50.00, '09:30:00'),
 (2, 2, 75.00, '14:15:00'),
@@ -130,22 +129,29 @@ VALUES
 
 ALTER TABLE owners
 ADD registereddate DATE;
+
 ALTER TABLE payments
 RENAME COLUMN paymentdate TO paymenttime;
+
 DELETE FROM appointments
 WHERE animalid = 5;
+
 UPDATE doctors
-SET dlastname = 'Reyes-Gonzales'
+SET lastname = 'Reyes-Gonzales'
 WHERE doctorid = 4;
+
 SELECT DISTINCT species
 FROM animals;
+
 SELECT SUM(totalamount) AS total_sales
 FROM invoices;
+
 SELECT COUNT(*) AS total_appointments
 FROM appointments a
 JOIN animals an ON a.animalid = an.animalid
 JOIN owners o ON an.ownerid = o.ownerid
 WHERE o.ofirstname = 'Maria';
+
 SELECT an.name, COUNT(*) AS total_appointments
 FROM appointments a
 JOIN animals an ON a.animalid = an.animalid
