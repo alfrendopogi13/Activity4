@@ -157,4 +157,4 @@ FROM appointments a
 JOIN animals an ON a.animalid = an.animalid
 GROUP BY an.name
 ORDER BY total_appointments DESC
-LIMIT 1
+LIMIT 1;
